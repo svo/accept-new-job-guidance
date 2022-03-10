@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="https://yui-s.yahooapis.com/pure/0.5.0/pure-min.css">
+<link rel="stylesheet" href="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.css">
+
+<style>
+.parent-div {
+  width: 100%;
+  text-align: center;
+}
+
+.radar-chart .area {
+  fill-opacity: 0.5;
+}
+
+.radar-chart.focus .area {
+  fill-opacity: 0.3;
+}
+
+.radar-chart.focus .area.focused {
+  fill-opacity: 0.8;
+}
+
+.radar-chart {
+  padding-top: 50px;
+  padding-right: 200px;
+  float: center;
+  height: 600px;
+  display: inline-block;
+}
+
+.legend {
+  padding-top: 50px;
+  height: 200px;
+  width: 200px;
+  float: left;
+}
+
+.area.me, .me .circle {
+  fill: #99ff66;
+  stroke: none;
+}
+
+.area.current, .current .circle {
+  fill: #3300ff;
+  stroke: none;
+}
+
+.area.offer, .offer .circle {
+  fill: #ff9933;
+  stroke: none;
+}
+</style>
+
+<script src="https://d3js.org/d3.v3.js"></script>
+<script src="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.js"></script>
+
+<script>
+  RadarChart.defaultConfig.color = function() {};
+  RadarChart.defaultConfig.w = 500;
+  RadarChart.defaultConfig.h = 500;
+</script>
+
+<script>
+  var data =[
+      {
+          className: 'current',
+          label: 'What I currently have',
+          axes: [
+              {axis: "more work", value: 3},
+              {axis: "more pay", value: 2},
+              {axis: "more fun", value: 3},
+              {axis: "more passion", value: 2},
+              {axis: "more stability", value: 5},
+              {axis: "more career growth", value: 4},
+              {axis: "more learning", value: 4},
+              {axis: "more potential impact", value: 3},
+              {axis: "more flexibility", value: 3},
+            ]},
+      {
+          className: 'offer',
+          label: 'What I could have',
+          axes: [
+              {axis: "more work", value: 4},
+              {axis: "more pay", value: 4},
+              {axis: "more fun", value: 5},
+              {axis: "more passion", value: 5},
+              {axis: "more stability", value: 2},
+              {axis: "more career growth", value: 3},
+              {axis: "more learning", value: 5},
+              {axis: "more potential impact", value: 4},
+              {axis: "more flexibility", value: 5},
+            ]},
+      {
+          className: 'me',
+          label: 'What I want',
+          axes: [
+              {axis: "more work", value: 4},
+              {axis: "more pay", value: 3},
+              {axis: "more fun", value: 5},
+              {axis: "more passion", value: 5},
+              {axis: "more stability", value: 4},
+              {axis: "more career growth", value: 3},
+              {axis: "more learning", value: 4},
+              {axis: "more potential impact", value: 4},
+              {axis: "more flexibility", value: 5},
+            ]},
+    ];
+</script>
+
+<body>
+  <div class="parent-div">
+    <svg id="legend" class="legend"></svg>
+    <div class="radar-chart"></div>
+  </div>
+  <script>
+    RadarChart.draw(".radar-chart", data);
+
+    var svg = d3.select("#legend")
+
+    var textX = 30;
+    var circleX = 10;
+    var y = 130;
+    var incrementY = 30;
+
+    data.forEach(dataIndex => {
+          console.log(`.area.${dataIndex.className}, .current .${dataIndex.className}`);
+          var element = document.querySelector(`.area.${dataIndex.className}, .current .${dataIndex.className}`);
+          var colour = getComputedStyle(element).fill;
+
+          svg.append("circle").attr("cx", circleX).attr("cy", y).attr("r", 6).style("fill", colour)
+          svg.append("text").attr("x", textX).attr("y", y).text(dataIndex.label).style("font-size", "15px").attr("alignment-baseline", "middle")
+          y += incrementY;
+        })
+  </script>
+</body>
