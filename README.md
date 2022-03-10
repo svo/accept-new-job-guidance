@@ -10,7 +10,7 @@ Change the weightings of what you care about by updating the order of the `weigh
 
 Change values by updating the `data` here (assumes values between 1 and 5):
 
-  https://github.com/svo/accept-new-job-guidance/blob/main/index.html#L96
+  https://github.com/svo/accept-new-job-guidance/blob/main/index.html#L95
 
 ## Viewing Result
 
