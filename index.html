@@ -62,30 +62,31 @@
   RadarChart.defaultConfig.w = 500;
   RadarChart.defaultConfig.h = 500;
   RadarChart.defaultConfig.maxValue = 10;
-  RadarChart.defaultConfig.levels = 5;
+  RadarChart.defaultConfig.levels = 2;
 </script>
 
 <script>
   var weightings = [
-      "more fun",
-      "more passion in team",
-      "more stability",
-      "more broad learning",
-      "more pay",
-      "more career growth",
-      "more leadership learning",
-      "more potential business impact",
-      "more flexible",
-      "more technical",
-      "more work",
       "more political",
+      "more work",
+      "more career growth",
+      "more stability",
+      "more technical",
+      "more leadership",
+      "more pay",
+      "more potential business impact",
+      "more leadership learning",
+      "more broad learning",
+      "more flexible",
+      "more passion in team",
+      "more fun",
     ]
 
   function normalise(label, value) {
       var weighting = weightings.indexOf(label);
-      var normalisedWeighting = (weighting / (weightings.length - 1)) * 5;
+      var normalisedWeighting = (weighting / (weightings.length - 1)) * 6;
 
-      return (value + normalisedWeighting).toFixed(1);
+      return (value + normalisedWeighting - 1).toFixed(1);
   }
 
   function getAxis(axisName, axisValue) {
@@ -108,6 +109,7 @@
               getAxis("more potential business impact", 3),
               getAxis("more flexible", 3),
               getAxis("more technical", 2),
+              getAxis("more leadership", 5),
               getAxis("more political", 5),
             ]},
       {
@@ -125,6 +127,7 @@
               getAxis("more potential business impact", 4),
               getAxis("more flexible", 5),
               getAxis("more technical", 5),
+              getAxis("more leadership", 3),
               getAxis("more political", 2),
             ]},
       {
@@ -142,6 +145,7 @@
               getAxis("more potential business impact", 4),
               getAxis("more flexible", 5),
               getAxis("more technical", 4),
+              getAxis("more leadership", 4),
               getAxis("more political", 2),
             ]},
     ];
