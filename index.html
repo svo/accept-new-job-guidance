@@ -61,60 +61,88 @@
   RadarChart.defaultConfig.color = function() {};
   RadarChart.defaultConfig.w = 500;
   RadarChart.defaultConfig.h = 500;
+  RadarChart.defaultConfig.maxValue = 10;
+  RadarChart.defaultConfig.levels = 5;
 </script>
 
 <script>
+  var weightings = [
+      "more fun",
+      "more passion in team",
+      "more stability",
+      "more broad learning",
+      "more pay",
+      "more career growth",
+      "more leadership learning",
+      "more potential business impact",
+      "more flexible",
+      "more technical",
+      "more work",
+      "more political",
+    ]
+
+  function normalise(label, value) {
+      var weighting = weightings.indexOf(label);
+      var normalisedWeighting = (weighting / (weightings.length - 1)) * 5;
+
+      return (value + normalisedWeighting).toFixed(1);
+  }
+
+  function getAxis(axisName, axisValue) {
+      return {axis: axisName, value: normalise(axisName, axisValue)};
+  }
+
   var data =[
       {
           className: 'current',
           label: 'What I currently have',
           axes: [
-              {axis: "more work", value: 3},
-              {axis: "more pay", value: 2},
-              {axis: "more fun", value: 3},
-              {axis: "more passion around me", value: 2},
-              {axis: "more stability", value: 5},
-              {axis: "more career growth", value: 4},
-              {axis: "more broad learning", value: 4},
-              {axis: "more leadership learning", value: 4},
-              {axis: "more potential business impact", value: 3},
-              {axis: "more flexible", value: 3},
-              {axis: "more technical", value: 2},
-              {axis: "more political", value: 5},
+              getAxis("more work", 3),
+              getAxis("more pay", 2),
+              getAxis("more fun", 3),
+              getAxis("more passion in team", 2),
+              getAxis("more stability", 5),
+              getAxis("more career growth", 4),
+              getAxis("more broad learning", 4),
+              getAxis("more leadership learning", 4),
+              getAxis("more potential business impact", 3),
+              getAxis("more flexible", 3),
+              getAxis("more technical", 2),
+              getAxis("more political", 5),
             ]},
       {
           className: 'offer',
           label: 'What I could have',
           axes: [
-              {axis: "more work", value: 4},
-              {axis: "more pay", value: 4},
-              {axis: "more fun", value: 5},
-              {axis: "more passion around me", value: 5},
-              {axis: "more stability", value: 2},
-              {axis: "more career growth", value: 3},
-              {axis: "more broad learning", value: 5},
-              {axis: "more leadership learning", value: 2},
-              {axis: "more potential business impact", value: 4},
-              {axis: "more flexible", value: 5},
-              {axis: "more technical", value: 5},
-              {axis: "more political", value: 2},
+              getAxis("more work", 4),
+              getAxis("more pay", 4),
+              getAxis("more fun", 5),
+              getAxis("more passion in team", 5),
+              getAxis("more stability", 2),
+              getAxis("more career growth", 3),
+              getAxis("more broad learning", 5),
+              getAxis("more leadership learning", 2),
+              getAxis("more potential business impact", 4),
+              getAxis("more flexible", 5),
+              getAxis("more technical", 5),
+              getAxis("more political", 2),
             ]},
       {
           className: 'me',
           label: 'What I want',
           axes: [
-              {axis: "more work", value: 4},
-              {axis: "more pay", value: 3},
-              {axis: "more fun", value: 5},
-              {axis: "more passion around me", value: 5},
-              {axis: "more stability", value: 4},
-              {axis: "more career growth", value: 3},
-              {axis: "more broad learning", value: 4},
-              {axis: "more leadership learning", value: 4},
-              {axis: "more potential business impact", value: 4},
-              {axis: "more flexible", value: 5},
-              {axis: "more technical", value: 4},
-              {axis: "more political", value: 3},
+              getAxis("more work", 3),
+              getAxis("more pay", 3),
+              getAxis("more fun", 5),
+              getAxis("more passion in team", 5),
+              getAxis("more stability", 3),
+              getAxis("more career growth", 3),
+              getAxis("more broad learning", 4),
+              getAxis("more leadership learning", 3),
+              getAxis("more potential business impact", 4),
+              getAxis("more flexible", 5),
+              getAxis("more technical", 4),
+              getAxis("more political", 2),
             ]},
     ];
 </script>
@@ -135,7 +163,6 @@
     var incrementY = 30;
 
     data.forEach(dataIndex => {
-          console.log(`.area.${dataIndex.className}, .current .${dataIndex.className}`);
           var element = document.querySelector(`.area.${dataIndex.className}, .current .${dataIndex.className}`);
           var colour = getComputedStyle(element).fill;
 
