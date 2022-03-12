@@ -16,4 +16,4 @@ Change values by updating the `data` here (assumes values between 1 and 5):
 
 View the result here:
 
-  https://rawgit.com/svo/accept-new-job-guidance/main/index.html
+  https://raw.githack.com/svo/accept-new-job-guidance/main/index.html
